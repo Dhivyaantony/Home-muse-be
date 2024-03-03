@@ -34,8 +34,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // Middleware setup
-app.use(cors());
+app.use(cors({origin:[`https://home-muse-client.onrender.com/`,`http://localhost:3000`]}));
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
