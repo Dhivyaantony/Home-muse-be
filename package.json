@@ -2,10 +2,8 @@
   "name": "be",
   "version": "0.0.0",
   "private": true,
-  
-    "scripts": {
-      "start": "nodemon ./bin/www"
-    
+  "scripts": {
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
