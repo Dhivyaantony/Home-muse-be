@@ -19,6 +19,7 @@ var usersRouter = require('./routes/users');
 const authRouter = require('./routes/authRouter');
 const taskRouter = require('./routes/taskRouter'); // Import the taskRouter
 const reminderRouter = require('./routes/reminderRouter');
+const recipiRouter = require('./Controllers/RecipiControl');
 
 // Import database connection function
 const connectDb = require('./Config/db');
@@ -47,7 +48,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/tasks', taskRouter);
-app.use('/reminders',reminderRouter)
+app.use('/reminders',reminderRouter);
+app.use('/recipi',recipiRouter);
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404)); // Forward to the error handling middleware
