@@ -3,7 +3,7 @@ const router = express.Router();
 const { userAuth } = require('../middlewares/authorization');
 const { sendEmail } = require('../Controllers/emailControl');
 const {
-  saveReminder,getRemindersByRecipientEmail,editReminder,deleteReminder,fetchRemindersToSend
+  saveReminder,getRemindersByRecipientEmail,updateReminder,deleteReminder,fetchRemindersToSend
   
 } = require('../Controllers/reminder');
 
@@ -12,7 +12,7 @@ router.post('/saveReminder', saveReminder);
 router.get('/getRemindersByRecipientEmail/:recipientEmail', getRemindersByRecipientEmail);
 // Route to get all reminders
 
-router.put('/updateReminder/:id', editReminder);
+router.put('/updateReminder/:id', updateReminder);
 
 // Route to delete a reminder by ID
 router.delete('/deleteReminder/:id', deleteReminder);

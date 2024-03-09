@@ -80,7 +80,7 @@ const getRemindersByRecipientEmail = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-const editReminder = async (req, res) => {
+const updateReminder = async (req, res) => {
   try {
       const { id } = req.params;
       const { task, recipient, taskName, message, time, dueDate } = req.body;
@@ -104,7 +104,7 @@ const editReminder = async (req, res) => {
 
       res.status(200).json(updatedReminder);
   } catch (error) {
-      console.error('Error editing reminder:', error);
+      console.error('Error updating reminder:', error);
       res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -127,7 +127,7 @@ const deleteReminder = async (req, res) => {
   }
 };
 
-module.exports = { saveReminder, getRemindersByRecipientEmail, editReminder, deleteReminder,
+module.exports = { saveReminder, getRemindersByRecipientEmail, updateReminder, deleteReminder,
  fetchRemindersToSend };
 
 
