@@ -20,7 +20,7 @@ const authRouter = require('./routes/authRouter');
 const taskRouter = require('./routes/taskRouter'); // Import the taskRouter
 const reminderRouter = require('./routes/reminderRouter');
 const recipiRouter = require('./routes/recipeRouter'); // Corrected import statement
-
+const mealplanRouter = require('./routes/mealRouter');
 // Import database connection function
 const connectDb = require('./Config/db');
 
@@ -50,6 +50,7 @@ app.use('/auth', authRouter);
 app.use('/tasks', taskRouter);
 app.use('/reminders',reminderRouter);
 app.use('/recipes',recipiRouter);
+app.use('/meal',mealplanRouter)
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404)); // Forward to the error handling middleware
