@@ -1,5 +1,5 @@
 const Reminder = require('../Model/ReminderMode');
-const { sendEmail } = require('./emailControl');
+const { sendEmail } = require('./emailCotrols');
 
 const fetchRemindersToSend = async () => {
   try {

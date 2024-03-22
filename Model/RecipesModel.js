@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const recipeSchema = mongoose.Schema({
   name: {
     type: String,
@@ -14,7 +15,6 @@ const recipeSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-
   imageUrl: {
     type: String,
     required: true,
@@ -35,8 +35,11 @@ const recipeSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  videoUrl:String
+  videoUrl: String,
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Favorite" }],
 });
 
- const RecipesModel = mongoose.model('RecipesModel', recipeSchema);
- module.exports = RecipesModel;
+const RecipesModel = mongoose.model('RecipesModel', recipeSchema);
+module.exports = RecipesModel;
