@@ -39,6 +39,8 @@ const recipeSchema = mongoose.Schema({
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Favorite" }],
+  category: String // New field for category
+
 });
 
 const RecipesModel = mongoose.model('RecipesModel', recipeSchema);

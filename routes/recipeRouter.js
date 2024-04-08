@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { userAuth } = require('../middlewares/authorization');
-const { addRecipe, getRecipes, getUserRecipes, editRecipe, deleteRecipe, getRecipeById, saveRecipe,getSavedRecipes, autocompleteRecipes
+const { addRecipe, getRecipes, getUserRecipes, editRecipe, deleteRecipe, getRecipeById, saveRecipe,getSavedRecipes, autocompleteRecipes,
+    getRecipesByCategory,getRecipeIngredients
 } = require('../Controllers/recipeControl');
 
 router.post('/addRecipe', userAuth, addRecipe);
@@ -15,6 +16,12 @@ router.get('/savedRecipes', userAuth, getSavedRecipes);
 router.post('/saveRecipe', userAuth, saveRecipe);
 router.get('/autocompleteRecipes',  autocompleteRecipes)
 
+router.get('/getRecipesByCategory',  getRecipesByCategory)
+
+
+router.get('/getRecipeIngredients/:recipeId', getRecipeIngredients);
+
+module.exports = router;
 
 
 module.exports = router;

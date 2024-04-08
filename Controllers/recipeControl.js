@@ -4,23 +4,21 @@ const SavedRecipe = require('../Model/SavedRecipe');
 // Controller function for adding a new recipe
 const addRecipe = async (req, res) => {
   try {
-    console.log('Received Recipe Data:', req.body); // Log received recipeData
+    console.log('Received Recipe Data:', req.body);
 
-    const { name, ingredients, instructions, imageUrl, cookingTime, userOwner, videoUrl} = req.body
+    const { name, ingredients, instructions, imageUrl, cookingTime, userOwner, videoUrl, category } = req.body;
 
-    // Create a new recipe document
     const newRecipe = new RecipesModel({
       name,
       ingredients,
       instructions,
       imageUrl,
       cookingTime,
-      userOwner, // Assuming you have a user ID available in the request body
-      videoUrl, // Include video URL in the recipe data
-
+      userOwner,
+      videoUrl,
+      category // Include category in the recipe data
     });
 
-    // Save the new recipe to the database
     const savedRecipe = await newRecipe.save();
     res.status(201).json(savedRecipe);
   } catch (error) {
@@ -29,7 +27,42 @@ const addRecipe = async (req, res) => {
   }
 };
 
+const getRecipesByCategory = async (req, res) => {
+  try {
+    const categorizedRecipes = {
+      Breakfast: await RecipesModel.find({ category: 'Breakfast' }),
+      lunch: await RecipesModel.find({ category: 'lunch' }),
+      Dinner: await RecipesModel.find({ category: 'Dinner' }),
+      Snack: await RecipesModel.find({ category: 'Snack' })
+    };
 
+    res.status(200).json({ success: true, recipes: categorizedRecipes });
+  } catch (error) {
+    console.error('Error fetching recipes by category:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch recipes' });
+  }
+};
+
+
+const getRecipeIngredients = async (req, res) => {
+  try {
+    const { recipeId } = req.params;
+
+    // Find the recipe by ID
+    const recipe = await RecipesModel.findById(recipeId);
+
+    if (!recipe) {
+      return res.status(404).json({ message: 'Recipe not found' });
+    }
+
+    // Extract and return the ingredients of the recipe
+    const ingredients = recipe.ingredients;
+    res.status(200).json({ ingredients });
+  } catch (error) {
+    console.error('Error fetching recipe ingredients:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 const getRecipeById = async (req, res) => {
   const recipeId = req.params.recipeId;
@@ -166,6 +199,8 @@ module.exports = {
   getRecipeById,
   saveRecipe ,
   getSavedRecipes,
-  autocompleteRecipes
+  autocompleteRecipes,
+  getRecipesByCategory,
+  getRecipeIngredients
   // Include getRecipeById in the exports
 };

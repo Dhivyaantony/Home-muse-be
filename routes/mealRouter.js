@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const mealPlanController = require('../Controllers/mealControl');
+const {createMealPlan} = require('../Controllers/mealControl');
+const { userAuth } = require('../middlewares/authorization');
 
 // Define routes
-router.post('/', mealPlanController.createMealPlan);
-router.get('/:userID', mealPlanController.getMealPlansByUser);
-router.put('/:planID', mealPlanController.updateMealPlan);
-router.delete('/:planID', mealPlanController.deleteMealPlan);
+router.post('/createMealPlan', userAuth, createMealPlan);
+
 
 module.exports = router;
